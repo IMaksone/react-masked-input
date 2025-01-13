@@ -1,9 +1,16 @@
 import { ChangeEvent, FocusEvent, MouseEvent, KeyboardEvent } from "react";
 
-export type OnChangeInputType = (event: ChangeEvent<HTMLInputElement>) => void
+export type InputChangeEvent = ChangeEvent<HTMLInputElement>;
+export type InputFocusEvent = FocusEvent<HTMLInputElement>;
+export type InputMouseEvent = MouseEvent<HTMLInputElement>;
+export type InputKeyboardEvent = KeyboardEvent<HTMLInputElement>;
 
-export type  OnFocusInputType = (event: FocusEvent<HTMLInputElement>) => void 
+export type OnChangeInputType = (event: InputChangeEvent) => void;
 
-export type  OnClickInputType = (event: MouseEvent<HTMLInputElement>) => void 
+export type OnFocusInputType = (event: InputFocusEvent) => void;
 
-export type  OnKeyDownInputType = (event: KeyboardEvent<HTMLInputElement>) => void 
+export type OnClickInputType = (event: InputMouseEvent) => void;
+
+export type OnKeyDownInputType = (event: InputKeyboardEvent) => void;
+
+export type DefaultInputValue = string | null;

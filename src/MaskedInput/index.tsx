@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useState } from "react";
+import React, { RefObject, useEffect, useMemo, useState } from "react";
 
 import { createMaskString } from "../helper/mask";
 import valueChange from "../helper/valueChange";
@@ -7,12 +7,17 @@ import combiningValueWithMask from "../helper/combiningValueWithMask";
 import reservedCharactersToEmptyChar from "../helper/reservedCharactersToEmptyChar";
 import { EMPTY_CHAR } from "../contants";
 import {
+  DefaultInputValue,
   OnChangeInputType,
   OnClickInputType,
   OnFocusInputType,
   OnKeyDownInputType,
 } from "../types/input";
 import { useSetCursor } from "../hooks/useSetCursor";
+import { useDefaultValue } from "../hooks/useDefaultValue";
+import { FunctionBody } from "typescript";
+import getFocusHandlerNewValue from "../helper/input/getFocusHandlerNewValue";
+import focusHandlerCursorCorrecting from "../helper/input/focusHandlerCursorCorrecting";
 
 export interface InputMaskInterface {
   mask: string | GetMaskType;
@@ -35,38 +40,33 @@ export interface InputMaskInterface {
 
 const InputWithMask = ({
   mask,
-  onChange,
-  value,
-  onFocus,
-  onBlur,
   inputRef,
   id,
   className,
   name,
   type,
+  value,
   disabled,
   autoComplete,
   autoFocus,
   readOnly,
+  onChange,
+  onFocus,
+  onBlur,
   onClick,
   onKeyDown,
 }: InputMaskInterface) => {
-  const maskString = createMaskString(mask, value);
+  const maskString = useMemo(
+    () => createMaskString(mask, value),
+    [mask, value]
+  );
 
   const setCursor = useSetCursor();
 
-  const [defaultValue, setDefaultValue] = useState<string | null>("");
-  const handleNullDefaultValue = () =>
-    defaultValue !== null ? setDefaultValue(null) : undefined;
-
-  useEffect(() => {
-    if (value && defaultValue !== null) {
-      setDefaultValue(combiningValueWithMask(value, maskString));
-    }
-  }, [value, defaultValue, value, mask]);
+  const [defaultValue, setDefaultValue] = useDefaultValue(value, maskString);
 
   const changeHandler: OnChangeInputType = (event) => {
-    handleNullDefaultValue();
+    setDefaultValue(null);
 
     const inputType = (event.nativeEvent as any)?.inputType;
     const input = event.target;
@@ -81,7 +81,6 @@ const InputWithMask = ({
       inputType
     );
 
-    // вызываем onChange
     event.target.value = replacedNewValue;
     onChange(event);
 
@@ -92,37 +91,15 @@ const InputWithMask = ({
   };
 
   const focusHandler: OnFocusInputType = (event) => {
-    handleNullDefaultValue();
+    setDefaultValue(null);
 
-    let newValue = "";
+    const newValue = getFocusHandlerNewValue(value, defaultValue, maskString);
 
-    if (!value) {
-      // если input пустой добавляем маску и переносим курсор в начало
-      newValue = reservedCharactersToEmptyChar(maskString);
+    event.target.value = newValue;
 
-      event.target.value = newValue;
+    onChange(event);
 
-      // вызываем onChange
-      onChange(event);
-    } else if (defaultValue) {
-      // если есть defaultValue обновляем value с учетом маски и вызываем onChange
-      newValue = combiningValueWithMask(value, maskString);
-
-      event.target.value = newValue;
-
-      // вызываем onChange
-      onChange(event);
-    }
-
-    const index = (newValue || value).indexOf(EMPTY_CHAR);
-
-    // сдвигаем курсор к первому пустому символу
-    if (index >= 0) {
-      setTimeout(() => {
-        event.target.selectionStart = index;
-        event.target.selectionEnd = index;
-      });
-    }
+    focusHandlerCursorCorrecting(newValue, value, event)
 
     if (onFocus) {
       onFocus(event);
@@ -130,7 +107,7 @@ const InputWithMask = ({
   };
 
   const blurHandler: OnFocusInputType = (event) => {
-    handleNullDefaultValue();
+    setDefaultValue(null);
 
     // если в поле пустая маска не показываем ее
     if (reservedCharactersToEmptyChar(maskString) === event.target.value) {
