@@ -1,4 +1,4 @@
-import { EMPTY_CHAR, MASK_RULES } from "../maskedInput/contants";
+import { EMPTY_CHAR, MASK_RULES } from "../contants";
 
 // $$$$ -> ____
 export default function reservedCharactersToEmptyChar(maskString: string) {

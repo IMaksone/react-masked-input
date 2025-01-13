@@ -1,4 +1,4 @@
-import { MASK_RULES, EMPTY_CHAR } from "../../maskedInput/contants";
+import { MASK_RULES, EMPTY_CHAR } from "../../contants";
 import { ValueCharCheksContext } from "./types";
 
 type IfNoValueCharContext = Pick<

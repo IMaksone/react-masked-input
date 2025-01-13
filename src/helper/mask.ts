@@ -1,4 +1,4 @@
-import { EMPTY_CHAR } from "../maskedInput/contants";
+import { EMPTY_CHAR } from "../contants";
 import { GetMaskType } from "../types/getMaskType";
 import replaceReservedCharactersWithEmptyChar from "./reservedCharactersToEmptyChar";
 

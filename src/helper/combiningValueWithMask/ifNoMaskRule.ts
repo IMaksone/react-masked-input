@@ -2,7 +2,7 @@ import {
   EMPTY_CHAR,
   NO_EMPTY_CHAR_RUL,
   MASK_RULES,
-} from "../../maskedInput/contants";
+} from "../../contants";
 import findCorrectChar from "../findCorrectChar";
 import Index from "../Index";
 import { ValueCharCheksContext } from "./types";

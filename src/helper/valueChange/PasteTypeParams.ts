@@ -1,5 +1,5 @@
 import { ValueParams } from "../../types/common";
-import { EMPTY_CHAR } from "../../maskedInput/contants";
+import { EMPTY_CHAR } from "../../contants";
 
 export type PasteTypeParamsContext = {
   end: number;

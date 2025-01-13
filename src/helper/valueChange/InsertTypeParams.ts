@@ -1,5 +1,5 @@
 import { Position, ValueParams } from "../../types/common";
-import { EMPTY_CHAR } from "../../maskedInput/contants";
+import { EMPTY_CHAR } from "../../contants";
 import reservedCharactersToEmptyChar from "../reservedCharactersToEmptyChar";
 
 export type InsertTypeParamsContext = {
