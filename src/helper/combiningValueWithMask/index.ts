@@ -10,14 +10,14 @@ export default function combiningValueWithMask(
   const maskArrMapCallback = (maskChar: string) => {
     const valueChar = value[indexContext.index];
 
-    const props = {
+    const context = {
       valueChar,
       maskChar,
       value,
       indexContext,
     };
 
-    const valueCharCheks: ValueCharCheks = new ValueCharCheksConstructor(props);
+    const valueCharCheks: ValueCharCheks = new ValueCharCheksConstructor(context);
     for (const key in valueCharCheks) {
       const result = valueCharCheks[key]();
 

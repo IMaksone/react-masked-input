@@ -1,0 +1,39 @@
+import { createMaskString } from "../mask";
+import valueChange from "../valueChange";
+import { InputChangeEvent } from "../../types/input";
+import { InputHandlersContext } from ".";
+
+export type ChangeHandlerContext = Pick<
+  InputHandlersContext,
+  "mask" | "value" | "setDefaultValue" | "onChange" | "setCursor"
+>;
+
+export default function changeHandler(
+  this: ChangeHandlerContext,
+  event: InputChangeEvent
+) {
+  const { mask, value, setDefaultValue, onChange, setCursor } = this;
+
+  setDefaultValue(null);
+
+  const inputType = (event.nativeEvent as any)?.inputType;
+  const input = event.target;
+  const newValue = input.value;
+
+  const newMaskString = createMaskString(mask, newValue);
+
+  const { replacedNewValue, start, end } = valueChange(
+    value,
+    newValue,
+    newMaskString,
+    inputType
+  );
+
+  event.target.value = replacedNewValue;
+  onChange(event);
+
+  input.selectionStart = start;
+  input.selectionEnd = end;
+
+  setCursor(input, [start, end]);
+}

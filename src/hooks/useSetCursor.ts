@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-type SetCursor = (
-  inputRef: EventTarget & HTMLInputElement,
-  position: [number, number]
-) => void;
+import { SetCursor } from "../types/setCursor";
 
 export const useSetCursor = (): SetCursor => {
   const [cursor, setCursor] = useState<any>({

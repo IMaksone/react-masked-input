@@ -1,8 +1,8 @@
 import { EMPTY_CHAR } from "../contants";
-import { GetMaskType } from "../types/getMaskType";
+import { Mask } from "../types/mask";
 import replaceReservedCharactersWithEmptyChar from "./reservedCharactersToEmptyChar";
 
-export const createMaskString = (mask: string | GetMaskType, value: string) => {
+export const createMaskString = (mask: Mask, value: string) => {
   if (typeof mask === "function") {
     return mask(value);
   } else {
