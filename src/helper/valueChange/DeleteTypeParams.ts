@@ -1,5 +1,5 @@
-import { SetIndex, ValueParams } from "../../types/common";
-import { EMPTY_CHAR } from "../../contants";
+import { ValueParams } from "../../types/common";
+import { EMPTY_CHAR } from "../../rules";
 import { isMaskChar } from "../mask";
 import INPUT_TYPES from "../../enums/inputTypes";
 

@@ -1,18 +1,14 @@
-import {
-  EMPTY_CHAR,
-  NO_EMPTY_CHAR_RUL,
-  MASK_RULES,
-} from "../../contants";
+import { EMPTY_CHAR, NO_EMPTY_CHAR_RUL, MASK_RULES } from "../../rules";
 import findCorrectChar from "../findCorrectChar";
-import Index from "../Index";
+import IndexManager from "../IndexManager";
 import { ValueCharCheksContext } from "./types";
 
-type OfIfNoMaskRuleContext = Pick<
+type IfNoMaskRuleContext = Pick<
   ValueCharCheksContext,
-  "valueChar" | "maskChar" | "value" | "indexContext"
+  "valueChar" | "maskChar" | "value" | "indexManager"
 >;
 
-export default function ifNoMaskRule(this: OfIfNoMaskRuleContext) {
+export default function ifNoMaskRule(this: IfNoMaskRuleContext) {
   const { maskChar } = this;
 
   const rule = MASK_RULES[maskChar];
@@ -24,24 +20,24 @@ export default function ifNoMaskRule(this: OfIfNoMaskRuleContext) {
   }
 }
 
-function check(this: OfIfNoMaskRuleContext) {
-  const { valueChar, maskChar, value, indexContext } = this;
+function check(this: IfNoMaskRuleContext) {
+  const { valueChar, maskChar, value, indexManager } = this;
 
   if (maskChar === valueChar) {
-    indexContext.nextIndex();
+    indexManager.nextIndex();
   } else if (valueChar === EMPTY_CHAR) {
-    valueCharIsEmptyChar(value, indexContext);
+    valueCharIsEmptyChar(value, indexManager);
   }
 }
 
-const valueCharIsEmptyChar = (value: string, indexContext: Index) => {
+const valueCharIsEmptyChar = (value: string, indexManager: IndexManager) => {
   const correctChar = findCorrectChar(
     value,
     NO_EMPTY_CHAR_RUL,
-    indexContext.index + 1
+    indexManager.index + 1
   );
 
   if (correctChar.char) {
-    indexContext.setIndex(correctChar.index);
+    indexManager.setIndex(correctChar.index);
   }
 };

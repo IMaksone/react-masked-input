@@ -1,4 +1,4 @@
-import { EMPTY_CHAR } from "../contants";
+import { EMPTY_CHAR } from "../rules";
 import { Mask } from "../types/mask";
 import replaceReservedCharactersWithEmptyChar from "./reservedCharactersToEmptyChar";
 

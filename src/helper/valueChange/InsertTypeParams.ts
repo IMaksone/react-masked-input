@@ -1,5 +1,5 @@
 import { Position, ValueParams } from "../../types/common";
-import { EMPTY_CHAR } from "../../contants";
+import { EMPTY_CHAR } from "../../rules";
 import reservedCharactersToEmptyChar from "../reservedCharactersToEmptyChar";
 
 export type InsertTypeParamsContext = {
@@ -28,6 +28,7 @@ class InsertTypeParams {
     noCombinedPosition,
   }: InsertTypeParamsContext) {
     this.maskedValue = maskedValue;
+    this.maskedNewValue = maskedNewValue;
     this.maskString = maskString;
     this.noCombinedPosition = noCombinedPosition;
 
@@ -46,7 +47,7 @@ class InsertTypeParams {
   }
 
   private skipInsert() {
-    const start = this.noCombinedPosition.start;
+    const start = this.noCombinedPosition.startIndexManager.index;
 
     const minStart = reservedCharactersToEmptyChar(this.maskString).indexOf(
       EMPTY_CHAR

@@ -1,16 +1,16 @@
-import { MASK_RULES } from "../../contants";
+import { MASK_RULES } from "../../rules";
 import { ValueCharCheksContext } from "./types";
 
 type IfCorrectValueCharContext = Pick<
   ValueCharCheksContext,
-  "valueChar" | "maskChar" | "indexContext"
+  "valueChar" | "maskChar" | "indexManager"
 >;
 
 export default function ifCorrectValueChar(this: IfCorrectValueCharContext) {
-  const { valueChar, maskChar, indexContext } = this;
+  const { valueChar, maskChar, indexManager } = this;
 
   if (MASK_RULES[maskChar]?.test(valueChar)) {
-    indexContext.nextIndex();
+    indexManager.nextIndex();
     return valueChar;
   }
 }

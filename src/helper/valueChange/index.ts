@@ -1,7 +1,7 @@
 import INPUT_TYPES from "../../enums/inputTypes";
 import combiningValueWithMask from "../combiningValueWithMask";
 import InputTypeMethods from "./InputTypeMethods";
-import PositionOfSelectedCharacters from '../PositionOfSelectedCharacters'
+import PositionOfSelectedCharacters from "../PositionOfSelectedCharacters";
 
 export default function valueChange(
   value: string,
@@ -17,23 +17,21 @@ export default function valueChange(
     newValue
   );
 
-  const { start, end, setStart, setEnd } = new PositionOfSelectedCharacters(
-    maskedValue,
-    maskedNewValue
-  );
+  const { startIndexManager, endIndexManager } =
+    new PositionOfSelectedCharacters(maskedValue, maskedNewValue);
 
-  if (start < 0) {
-    setStart(noCombinedPosition.start);
-    setEnd(noCombinedPosition.end);
+  if (startIndexManager.index < 0) {
+    startIndexManager.setIndex(noCombinedPosition.startIndexManager.index);
+    endIndexManager.setIndex(noCombinedPosition.endIndexManager.index);
   }
-  if (start < 0) {
-    setStart(maskedValue.length);
-    setEnd(maskedValue.length);
+  if (startIndexManager.index < 0) {
+    startIndexManager.setIndex(maskedValue.length);
+    endIndexManager.setIndex(maskedValue.length);
   }
 
   const methods = new InputTypeMethods({
-    start,
-    end,
+    start: startIndexManager.index,
+    end: endIndexManager.index,
     maskString,
     maskedNewValue,
     maskedValue,
@@ -46,8 +44,8 @@ export default function valueChange(
   return (
     result || {
       replacedNewValue: maskedNewValue,
-      start,
-      end: end + 1,
+      start: startIndexManager.index,
+      end: endIndexManager.index + 1,
     }
   );
 }

@@ -1,12 +1,8 @@
-export type NextIndex = () => number;
-
-export type SetIndex = (newIndex: number) => void;
+import IndexManager from "src/helper/IndexManager";
 
 export type Position = {
-  start: number;
-  end: number;
-  setStart: SetIndex;
-  setEnd: SetIndex;
+  startIndexManager: IndexManager;
+  endIndexManager: IndexManager;
 };
 
 export type ValueParams = {

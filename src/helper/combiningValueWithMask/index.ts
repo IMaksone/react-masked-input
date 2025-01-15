@@ -1,23 +1,25 @@
-import Index from "../Index";
+import IndexManager from "../IndexManager";
 import ValueCharCheksConstructor, { ValueCharCheks } from "./ValueCharCheks";
 
 export default function combiningValueWithMask(
   value: string,
   maskString: string
 ): string {
-  const indexContext = new Index();
+  const indexManager = new IndexManager();
 
   const maskArrMapCallback = (maskChar: string) => {
-    const valueChar = value[indexContext.index];
+    const valueChar = value[indexManager.index];
 
     const context = {
       valueChar,
       maskChar,
       value,
-      indexContext,
+      indexManager,
     };
 
-    const valueCharCheks: ValueCharCheks = new ValueCharCheksConstructor(context);
+    const valueCharCheks: ValueCharCheks = new ValueCharCheksConstructor(
+      context
+    );
     for (const key in valueCharCheks) {
       const result = valueCharCheks[key]();
 

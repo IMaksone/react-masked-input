@@ -1,42 +1,32 @@
-import { SetIndex } from "../types/common";
-import Index from "./Index";
+import IndexManager from "./IndexManager";
 
 interface PositionOfSelectedCharacters {
-  start: number;
-  end: number;
-  setStart: SetIndex;
-  setEnd: SetIndex;
+  startIndexManager: IndexManager
+  endIndexManager: IndexManager
 }
 
 // ____ -> |11|__
 class PositionOfSelectedCharacters {
   private maskedValue: string;
   private maskedNewValue: string;
-  private startIndex: Index;
-  private endIndex: Index;
 
   constructor(maskedValue: string, maskedNewValue: string) {
     this.maskedValue = maskedValue;
     this.maskedNewValue = maskedNewValue;
-    this.startIndex = new Index(-1);
-    this.endIndex = new Index(-1);
+    this.startIndexManager = new IndexManager(-1);
+    this.endIndexManager = new IndexManager(-1);
 
     this.definePositionForString();
-
-    this.start = this.startIndex.index;
-    this.end = this.endIndex.index;
-    this.setStart = this.startIndex.setIndex;
-    this.setEnd = this.endIndex.setIndex;
   }
 
   private definePositionForChar(index: number) {
-    const { startIndex, endIndex } = this;
+    const { startIndexManager, endIndexManager } = this;
 
-    if (startIndex.index < 0) {
-      startIndex.setIndex(index);
+    if (startIndexManager.index < 0) {
+      startIndexManager.setIndex(index);
     }
 
-    endIndex.setIndex(index);
+    endIndexManager.setIndex(index);
   }
 
   private definePositionForString() {

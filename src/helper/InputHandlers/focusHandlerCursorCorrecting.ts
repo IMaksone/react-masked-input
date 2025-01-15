@@ -1,4 +1,4 @@
-import { EMPTY_CHAR } from "../../contants";
+import { EMPTY_CHAR } from "../../rules";
 import { InputChangeEvent } from "../../types/input";
 
 export default function focusHandlerCursorCorrecting(

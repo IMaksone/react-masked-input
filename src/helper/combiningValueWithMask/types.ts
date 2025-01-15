@@ -1,8 +1,8 @@
-import Index from "../Index";
+import IndexManager from "../IndexManager";
 
 export type ValueCharCheksContext = {
   valueChar: string;
   maskChar: string;
   value: string;
-  indexContext: Index;
+  indexManager: IndexManager;
 };

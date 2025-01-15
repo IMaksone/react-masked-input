@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <>
-      <MaskedInput mask={"9999"} value={value} setValue={setValue} />
+      <MaskedInput mask={"9$$:$$1$$"} value={value} setValue={setValue} />
     </>
   );
 };
