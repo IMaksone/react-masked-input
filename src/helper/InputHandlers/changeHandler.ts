@@ -5,14 +5,14 @@ import { InputHandlersContext } from ".";
 
 export type ChangeHandlerContext = Pick<
   InputHandlersContext,
-  "mask" | "value" | "setDefaultValue" | "onChange" | "setCursor"
+  "mask" | "value" | "setDefaultValue" | "setValue" | "onChange" | "setCursor"
 >;
 
 export default function changeHandler(
   this: ChangeHandlerContext,
   event: InputChangeEvent
 ) {
-  const { mask, value, setDefaultValue, onChange, setCursor } = this;
+  const { mask, value, setDefaultValue, setValue, onChange, setCursor } = this;
 
   setDefaultValue(null);
 
@@ -30,10 +30,12 @@ export default function changeHandler(
   );
 
   event.target.value = replacedNewValue;
-  onChange(event);
+  setValue(replacedNewValue);
 
   input.selectionStart = start;
   input.selectionEnd = end;
 
   setCursor(input, [start, end]);
+
+  onChange?.(event);
 }

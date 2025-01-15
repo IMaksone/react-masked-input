@@ -3,10 +3,10 @@ import React, { useMemo } from "react";
 import { createMaskString } from "../helper/mask";
 import { useSetCursor } from "../hooks/useSetCursor";
 import { useDefaultValue } from "../hooks/useDefaultValue";
-import { InputWithMask } from "./types";
-import InputHandlers from "../helper/inputHandlers";
+import { InputWithMaskType } from "./types";
+import InputHandlers from "../helper/InputHandlers";
 
-const InputWithMask: InputWithMask = ({
+const InputWithMask: InputWithMaskType = ({
   mask,
   inputRef,
   id,
@@ -18,6 +18,7 @@ const InputWithMask: InputWithMask = ({
   autoComplete,
   autoFocus,
   readOnly,
+  setValue,
   onChange,
   onFocus,
   onBlur,
@@ -39,6 +40,7 @@ const InputWithMask: InputWithMask = ({
     defaultValue,
     value,
     setDefaultValue,
+    setValue,
     onChange,
     onFocus,
     onBlur,

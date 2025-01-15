@@ -9,7 +9,7 @@ export type PasteTypeParamsContext = {
 
 interface PasteTypeParams extends ValueParams {}
 
-class PasteTypeParams {
+class PasteTypeParams implements ValueParams {
   constructor({ end, maskedNewValue }: PasteTypeParamsContext) {
     const emptyCharPosition = maskedNewValue.indexOf(EMPTY_CHAR) - 1;
 

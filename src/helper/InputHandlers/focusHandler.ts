@@ -9,7 +9,7 @@ export type FocusHandlerContext = Pick<
   | "defaultValue"
   | "value"
   | "setDefaultValue"
-  | "onChange"
+  | "setValue"
   | "onFocus"
 >;
 
@@ -22,7 +22,7 @@ export default function focusHandler(
     defaultValue,
     value,
     setDefaultValue,
-    onChange,
+    setValue,
     onFocus,
   } = this;
 
@@ -32,11 +32,9 @@ export default function focusHandler(
 
   event.target.value = newValue;
 
-  onChange(event);
+  setValue(newValue);
 
   focusHandlerCursorCorrecting(newValue, value, event);
 
-  if (onFocus) {
-    onFocus(event);
-  }
+  onFocus?.(event);
 }

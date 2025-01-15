@@ -4,14 +4,14 @@ import reservedCharactersToEmptyChar from "../reservedCharactersToEmptyChar";
 
 type BlurHandlerContext = Pick<
   InputHandlersContext,
-  "maskString" | "setDefaultValue" | "onChange" | "onBlur"
+  "maskString" | "setDefaultValue" | "setValue" | "onBlur"
 >;
 
 export default function blurHandler(
   this: BlurHandlerContext,
   event: InputFocusEvent
 ) {
-  const { maskString, setDefaultValue, onChange, onBlur } = this;
+  const { maskString, setDefaultValue, setValue, onBlur } = this;
 
   setDefaultValue(null);
 
@@ -19,11 +19,8 @@ export default function blurHandler(
   if (reservedCharactersToEmptyChar(maskString) === event.target.value) {
     event.target.value = "";
 
-    // вызываем onChange
-    onChange(event);
+    setValue("");
   }
 
-  if (onBlur) {
-    onBlur(event);
-  }
+  onBlur?.(event);
 }

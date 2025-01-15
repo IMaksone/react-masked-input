@@ -6,6 +6,7 @@ import {
   OnChangeInputType,
   OnFocusInputType,
   SetDefaultInputValue,
+  SetValue,
 } from "../../types/input";
 import { SetCursor } from "../../types/setCursor";
 import { Mask } from "../../types/mask";
@@ -16,7 +17,8 @@ export type InputHandlersContext = {
   defaultValue: DefaultInputValue;
   value: string;
   setDefaultValue: SetDefaultInputValue;
-  onChange: OnChangeInputType;
+  setValue: SetValue;
+  onChange?: OnChangeInputType;
   onFocus?: OnFocusInputType;
   onBlur?: OnFocusInputType;
   setCursor: SetCursor;

@@ -23,3 +23,5 @@ export type DefaultInputValue = string | null;
 export type SetDefaultInputValue = Dispatch<
   React.SetStateAction<DefaultInputValue>
 >;
+
+export type SetValue = (value: string) => void

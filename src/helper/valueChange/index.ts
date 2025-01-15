@@ -1,6 +1,6 @@
 import INPUT_TYPES from "../../enums/inputTypes";
 import combiningValueWithMask from "../combiningValueWithMask";
-import InputTypeMethods from "./inputTypeMethods";
+import InputTypeMethods from "./InputTypeMethods";
 import PositionOfSelectedCharacters from '../PositionOfSelectedCharacters'
 
 export default function valueChange(
