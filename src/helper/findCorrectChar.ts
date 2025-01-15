@@ -1,3 +1,5 @@
+import { isMaskChar } from "./mask";
+
 export default function findCorrectChar(
   string: string,
   rule: RegExp,
@@ -6,8 +8,12 @@ export default function findCorrectChar(
   let index = startIndex;
 
   do {
-    if (rule.test(string[index])) {
-      const char = string[index];
+    const char = string[index];
+    const charIsCorrect = rule.test(char);
+
+    //console.log(char, index, isMaskChar(char, index))
+
+    if (charIsCorrect && !isMaskChar(char, index)) {
       index++;
 
       return { char, index };

@@ -23,6 +23,8 @@ export default function combiningValueWithMask(
     for (const key in valueCharCheks) {
       const result = valueCharCheks[key]();
 
+      if (result)console.log(value[indexManager.index],valueChar, maskChar, key, result)
+
       if (result) return result;
     }
 

@@ -1,4 +1,4 @@
-import { InputHandlersContext } from ".";
+import { InputHandlersContext } from "./types";
 import { InputFocusEvent } from "../../types/input";
 import reservedCharactersToEmptyChar from "../reservedCharactersToEmptyChar";
 

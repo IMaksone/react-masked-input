@@ -15,7 +15,7 @@ export default function ifNotCorrectValueChar(
   const rule = MASK_RULES[maskChar];
 
   if (rule && !rule.test(valueChar)) {
-    const correctChar = findCorrectChar(value, rule, indexManager.index + 1);
+    const correctChar = findCorrectChar(value, rule, indexManager.index);
 
     if (correctChar.char) {
       indexManager.setIndex(correctChar.index);

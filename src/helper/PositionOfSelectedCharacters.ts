@@ -1,8 +1,8 @@
 import IndexManager from "./IndexManager";
 
 interface PositionOfSelectedCharacters {
-  startIndexManager: IndexManager
-  endIndexManager: IndexManager
+  startIndexManager: IndexManager;
+  endIndexManager: IndexManager;
 }
 
 // ____ -> |11|__
@@ -19,6 +19,16 @@ class PositionOfSelectedCharacters {
     this.definePositionForString();
   }
 
+  private definePositionForString() {
+    const maskedValueArr = this.maskedValue.split("");
+
+    maskedValueArr.forEach((char, index) => {
+      const charDoesNotFitMask = char !== this.maskedNewValue[index];
+
+      if (charDoesNotFitMask) this.definePositionForChar(index);
+    });
+  }
+
   private definePositionForChar(index: number) {
     const { startIndexManager, endIndexManager } = this;
 
@@ -27,15 +37,6 @@ class PositionOfSelectedCharacters {
     }
 
     endIndexManager.setIndex(index);
-  }
-
-  private definePositionForString() {
-    for (const [key, char] of this.maskedValue) {
-      const index = +key;
-
-      if (char !== this.maskedNewValue[index])
-        this.definePositionForChar(index);
-    }
   }
 }
 

@@ -12,6 +12,8 @@ export default function valueChange(
   const maskedValue = combiningValueWithMask(value, maskString);
   const maskedNewValue = combiningValueWithMask(newValue, maskString);
 
+  console.log(maskedValue, maskedNewValue)
+
   const noCombinedPosition = new PositionOfSelectedCharacters(
     maskedValue,
     newValue

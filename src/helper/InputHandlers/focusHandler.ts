@@ -1,4 +1,4 @@
-import { InputHandlersContext } from ".";
+import { InputHandlersContext } from "./types";
 import { InputFocusEvent } from "../../types/input";
 import focusHandlerCursorCorrecting from "./focusHandlerCursorCorrecting";
 import getFocusHandlerNewValue from "./getFocusHandlerNewValue";

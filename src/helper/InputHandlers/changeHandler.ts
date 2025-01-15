@@ -1,7 +1,7 @@
 import { createMaskString } from "../mask";
 import valueChange from "../valueChange";
 import { InputChangeEvent } from "../../types/input";
-import { InputHandlersContext } from ".";
+import { InputHandlersContext } from "./types";
 
 export type ChangeHandlerContext = Pick<
   InputHandlersContext,
